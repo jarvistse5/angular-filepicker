@@ -1,0 +1,22 @@
+<mat-dialog-content fxLayout="column">
+    <!-- icon -->
+    <div *ngIf="hasIcon" class="mb-5">
+        <!-- <ic-icon [icon]="icon" [size]="'48px'" [class]="'text-'+iconColor"></ic-icon> -->
+    </div>
+    <!-- title -->
+    <div *ngIf="title" class="text-xl" [innerHTML]="title"></div>
+    <!-- description -->
+    <div *ngIf="description" class="text-base mt-2" [innerHTML]="description"></div>
+    </mat-dialog-content>
+
+    <!-- actions -->
+    <mat-dialog-actions align="end">
+    <button mat-button type="button" (click)="cancel()" *ngIf="type == 'confirm'">
+        {{cancelText}}
+    </button>
+
+    <button mat-raised-button [color]="'primary'" type="button" (click)="confirm()">
+        {{confirmText}}
+    </button>
+</mat-dialog-actions>
+  
