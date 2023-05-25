@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { FilePickerComponent } from 'src/app/widgets/file-picker/file-picker.component';
+import { FilePickerModule } from 'src/app/widgets/file-picker/file-picker.module';
 import { DemoComponent } from './demo.component';
 
 const routes: Routes = [
@@ -14,7 +16,8 @@ const routes: Routes = [
   declarations: [DemoComponent],
   imports: [
     RouterModule.forChild(routes),
-    SharedModule
+    SharedModule,
+    FilePickerModule,
   ]
 })
 export class DemoModule { }

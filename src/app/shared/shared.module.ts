@@ -8,6 +8,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatTableModule } from '@angular/material/table';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -23,6 +24,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
       MatTooltipModule,
       MatTableModule,
       FlexLayoutModule,
+      FormsModule,
     ],
     exports: [
       CommonModule,
@@ -34,6 +36,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
       MatTooltipModule,
       MatTableModule,
       FlexLayoutModule,
+      FormsModule,
     ]
   })
   export class SharedModule { }

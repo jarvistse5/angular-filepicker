@@ -6,6 +6,8 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './shared/shared.module';
 import { MessageBoxComponent } from './widgets/message-box/message-box.component';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+
 
 @NgModule({
   declarations: [
@@ -16,9 +18,11 @@ import { MessageBoxComponent } from './widgets/message-box/message-box.component
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    SharedModule
+    SharedModule,
+    HttpClientModule,
   ],
-  providers: [],
+  providers: [
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

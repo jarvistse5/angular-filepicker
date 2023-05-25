@@ -1,0 +1,114 @@
+::ng-deep .file-picker .mat-mdc-dialog-container {
+    padding: 0px !important;
+    width: 1000px;
+}
+// .file-picker {
+//     width: 1000px;
+//     padding: 0px !important;
+// }
+
+.header{
+  width: 100%;
+  height: 70px;
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  user-select: none;
+  -moz-user-select: none;
+}
+
+.input-box{
+  width:100%;
+  height: 38px;
+  outline: none;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.submit-btn{
+  width: 40px;
+  height: 40px;
+}
+//
+.file-table-container{
+  overflow: auto;
+  height: 70%;
+  text-align: left;
+  // max-height: 275px;
+}
+
+.custom-dropzone {
+  display: block;
+  align-items: center;
+  text-align: center;
+  height: 100%;
+}
+
+.upload-icon{
+  width: 100px;
+  height: 70px;
+  font-size: 70px;
+}
+
+.upload-hints{
+  font-size: 1.5em;
+  color: #cccccc;
+}
+
+.preview-file-item{
+  width: 100%;
+  height: 50px;
+  margin: 10px;
+}
+
+ngx-dropzone-image-preview{
+  width: 180px;
+}
+
+.selected{
+  border: 2px solid black;
+}
+
+ngx-dropzone-video-preview{
+  height: auto !important;
+  ::ng-deep video {
+    width: 100%;
+  }
+}
+
+.content-container{
+  height: 500px;
+  user-select: none;
+  -moz-user-select: none;
+}
+
+.nav-container{
+  background-color: #f2f2f2;
+  color: #333333;
+  font-size: 1.15em;
+  user-select: none;
+  -moz-user-select: none;
+}
+
+.nav-item{
+  height: 100%;
+  max-height: 70px;
+  align-items: center;
+  display: flex;
+  padding: 0 20px;
+  cursor: pointer;
+
+  &:hover{
+    background-color: #cccccc;
+  }
+}
+
+.picker-container{
+  border-bottom: 1px solid #e5e5e5;
+}
+
+image-cropper{
+  text-align: center;
+  --cropper-outline-color: rgba(255,255,255,0.9);
+  width: auto;
+}
