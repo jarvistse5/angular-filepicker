@@ -9,6 +9,11 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatTableModule } from '@angular/material/table';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule } from '@angular/forms';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatSelectModule } from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 
 @NgModule({
@@ -25,6 +30,11 @@ import { FormsModule } from '@angular/forms';
       MatTableModule,
       FlexLayoutModule,
       FormsModule,
+      MatToolbarModule,
+      MatButtonToggleModule,
+      MatSlideToggleModule,
+      MatSelectModule,
+      MatFormFieldModule,
     ],
     exports: [
       CommonModule,
@@ -37,6 +47,11 @@ import { FormsModule } from '@angular/forms';
       MatTableModule,
       FlexLayoutModule,
       FormsModule,
+      MatToolbarModule,
+      MatButtonToggleModule,
+      MatSlideToggleModule,
+      MatSelectModule,
+      MatFormFieldModule,
     ]
   })
   export class SharedModule { }

@@ -11,25 +11,27 @@ import { MessageBox } from 'src/app/widgets/message-box/message-box';
 })
 export class DemoComponent {
 
+  fileAccept: string = '*';
+  multiple: boolean = true;
+  previewImage: boolean = true;
+  previewVideo: boolean = true;
+  aspectRatio: number = 4/3;
+  aspectRatioString: string = "4:3";
+
   constructor(
     @Optional() private translate: TranslateService,
     private messageBox: MessageBox,
     private dialog: MatDialog,
   ) {}
 
-  test() {
-    // alert('test');
-    this.messageBox.alert({title: this.translate.instant('only_accept_file_type'), description: "sdjfkjsdhf"});
-  }
-
   openFilePicker() {
     this.dialog.open(FilePickerComponent, {
       data: {
-        fileAccept: "image/*, video/*",
-        multiple: false,
-        previewImage: true,
-        previewVideo: true,
-        aspectRatio: 4 / 3,
+        fileAccept: this.fileAccept,
+        multiple: this.multiple,
+        previewImage: this.previewImage,
+        previewVideo: this.previewVideo,
+        aspectRatio: this.aspectRatio,
       },
       autoFocus: false,
       panelClass: 'file-picker',

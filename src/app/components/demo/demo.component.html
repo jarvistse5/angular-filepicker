@@ -1,1 +1,54 @@
-<button mat-raised-button class="m-5" color="primary" (click)="openFilePicker()">{{'browse'|translate}}</button>
+<div>
+    <mat-toolbar color="primary">
+        <span>Filepicker Demo</span>
+    </mat-toolbar>
+    <div class="main">
+        <div fxLayout="row" fxLayoutAlign="start center">
+            <h3 fxFlex="300px">Select Multiple File</h3>
+            <mat-button-toggle-group [(ngModel)]="multiple" name="multiple" aria-label="Select Multiple File">
+                <mat-button-toggle [value]="true">Yes</mat-button-toggle>
+                <mat-button-toggle [value]="false">No</mat-button-toggle>
+            </mat-button-toggle-group>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="start center">
+            <h3 fxFlex="300px">File Type Accept</h3>
+            <mat-form-field>
+                <mat-label>File Type Accept</mat-label>
+                <mat-select [(ngModel)]="fileAccept">
+                    <mat-option value="*">All File</mat-option>
+                    <mat-option value="image/*">Image Only</mat-option>
+                    <mat-option value="video/*">Video Only</mat-option>
+                    <mat-option value="image/*, video/*">Image and Video Only</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="start center">
+            <h3 fxFlex="300px">Preview Image</h3>
+            <mat-button-toggle-group [(ngModel)]="previewImage" name="preview_image" aria-label="Select Multiple File">
+                <mat-button-toggle [value]="true">Yes</mat-button-toggle>
+                <mat-button-toggle [value]="false">No</mat-button-toggle>
+            </mat-button-toggle-group>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="start center">
+            <h3 fxFlex="300px">Preview Video</h3>
+            <mat-button-toggle-group [(ngModel)]="previewVideo" name="preview_video" aria-label="Select Multiple File">
+                <mat-button-toggle [value]="true">Yes</mat-button-toggle>
+                <mat-button-toggle [value]="false">No</mat-button-toggle>
+            </mat-button-toggle-group>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="start center">
+            <h3 fxFlex="300px">Image Cropper Aspect Radio</h3>
+            <mat-form-field>
+                <mat-label>Image Cropper Aspect Radio</mat-label>
+                <mat-select [(ngModel)]="aspectRatioString">
+                    <mat-option value="1:1">1:1</mat-option>
+                    <mat-option value="4:3">4:3</mat-option>
+                    <mat-option value="16:9">16:9</mat-option>  
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div>
+            <button mat-raised-button color="primary" (click)="openFilePicker()">{{'browse'|translate}}</button>
+        </div>
+    </div>
+</div>
