@@ -24,6 +24,16 @@ export class DemoComponent {
     private dialog: MatDialog,
   ) {}
 
+  aspectRatioChange() {
+    if (this.aspectRatioString === '1:1') {
+      this.aspectRatio = 1;
+    } else if (this.aspectRatioString = '4:3') {
+      this.aspectRatio = 4/3;
+    } else if (this.aspectRatioString = '16:9') {
+      this.aspectRatio = 16/9;
+    }
+  }
+
   openFilePicker() {
     this.dialog.open(FilePickerComponent, {
       data: {

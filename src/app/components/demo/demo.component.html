@@ -40,7 +40,7 @@
             <h3 fxFlex="300px">Image Cropper Aspect Radio</h3>
             <mat-form-field>
                 <mat-label>Image Cropper Aspect Radio</mat-label>
-                <mat-select [(ngModel)]="aspectRatioString">
+                <mat-select [(ngModel)]="aspectRatioString" (selectionChange)="aspectRatioChange()">
                     <mat-option value="1:1">1:1</mat-option>
                     <mat-option value="4:3">4:3</mat-option>
                     <mat-option value="16:9">16:9</mat-option>  
