@@ -15,9 +15,7 @@ export class FilePickerService {
   }
 
   getFileFromUrl(url: string): Observable<File> {
-    const headers = new HttpHeaders({
-      'isRawUrl': 'true',
-    });
+    const headers = new HttpHeaders();
     return this.http.get(url, {headers, responseType: 'blob'}).pipe(map(res=>{
       var fileNameIndex = url.lastIndexOf("/") + 1;
       var fileName = url.substr(fileNameIndex);
