@@ -3,15 +3,15 @@
         <span>Filepicker Demo</span>
     </mat-toolbar>
     <div class="main">
-        <div fxLayout="row" fxLayoutAlign="start center">
-            <h3 fxFlex="300px">Select Multiple File</h3>
+        <div fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="start center" fxLayoutAlign.lt-md="start start">
+            <h3 fxFlex="300px" fxFlex.lt-md="auto">Select Multiple File</h3>
             <mat-button-toggle-group [(ngModel)]="multiple" name="multiple" aria-label="Select Multiple File">
                 <mat-button-toggle [value]="true">Yes</mat-button-toggle>
                 <mat-button-toggle [value]="false">No</mat-button-toggle>
             </mat-button-toggle-group>
         </div>
-        <div fxLayout="row" fxLayoutAlign="start center">
-            <h3 fxFlex="300px">File Type Accept</h3>
+        <div fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="start center" fxLayoutAlign.lt-md="start start">
+            <h3 fxFlex="300px" fxFlex.lt-md="auto">File Type Accept</h3>
             <mat-form-field>
                 <mat-label>File Type Accept</mat-label>
                 <mat-select [(ngModel)]="fileAccept">
@@ -22,8 +22,8 @@
                 </mat-select>
             </mat-form-field>
         </div>
-        <div fxLayout="row" fxLayoutAlign="start center">
-            <h3 fxFlex="300px">Preview Format</h3>
+        <div fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="start center" fxLayoutAlign.lt-md="start start">
+            <h3 fxFlex="300px" fxFlex.lt-md="auto">Preview Format</h3>
             <mat-form-field>
                 <mat-label>Preview Format</mat-label>
                 <mat-select [(ngModel)]="displayFormat" (selectionChange)="displayFormatChange()">
@@ -34,8 +34,8 @@
                 </mat-select>
             </mat-form-field>
         </div>
-        <div fxLayout="row" fxLayoutAlign="start center">
-            <h3 fxFlex="300px">Image Cropper Aspect Radio</h3>
+        <div fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="start center" fxLayoutAlign.lt-md="start start">
+            <h3 fxFlex="300px" fxFlex.lt-md="auto">Image Cropper Aspect Radio</h3>
             <mat-form-field>
                 <mat-label>Image Cropper Aspect Radio</mat-label>
                 <mat-select [(ngModel)]="aspectRatioString" (selectionChange)="aspectRatioChange()">
