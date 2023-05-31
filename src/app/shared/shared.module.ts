@@ -14,10 +14,12 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { BytePipe } from './pipes/byte.pipe';
 
 
 @NgModule({
     declarations: [
+        BytePipe
     ],
     imports: [
       CommonModule,
@@ -52,6 +54,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
       MatSlideToggleModule,
       MatSelectModule,
       MatFormFieldModule,
+      BytePipe,
     ]
   })
   export class SharedModule { }

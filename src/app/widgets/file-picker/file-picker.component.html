@@ -1,179 +1,178 @@
 <div class="header bg-primary text-primary-contrast px-5">
-    <h2>{{headerTitle}}</h2>
-    <button mat-dialog-close mat-icon-button type="button">
-      <span class="material-icons">close</span>
-    </button>
-  </div>
-  
-  <div class="content-container" fxLayout="row" fxLayout.xs="column">
-    <!-- nav-bar -->
-    <div class="nav-container" fxFlex="200px" fxFlex.xs="10%" fxLayout="column" fxLayout.xs="row">
-      <div fxFlex.xs="50%" fxLayoutAlign.xs="center center" class="nav-item" (click)="computer_upload()" [ngStyle]="{ 'background-color' : (uploadType === uploadEnum.computer) ? '#cccccc' : '#f2f2f2' }">
-        <span class="material-icons">computer</span>
-        <span fxHide.xs="true" class="pl-4">{{'my_computer'|translate}}</span>
-      </div>
-      <div fxFlex.xs="50%" fxLayoutAlign.xs="center center" class="nav-item" (click)="link_upload()" [ngStyle]="{ 'background-color' : (uploadType === uploadEnum.link) ? '#cccccc' : '#f2f2f2' }">
-        <span class="material-icons">public</span>
-        <span fxHide.xs="true" class="pl-4">{{'internet'|translate}}</span>
-      </div>
-      <!-- <div fxFlex.xs="33%" fxLayoutAlign.xs="center center" class="nav-item" (click)="google_upload()" [ngStyle]="{ 'background-color' : (uploadType === uploadEnum.google) ? '#cccccc' : '#f2f2f2' }">
-        <span class="material-icons">add_to_drive</span>
-        <span fxHide.xs="true" class="pl-4">Google Drive</span>
-      </div> -->
+  <h2>{{headerTitle}}</h2>
+  <button mat-dialog-close mat-icon-button type="button">
+    <span class="material-icons">close</span>
+  </button>
+</div>
+
+<div class="content-container" fxLayout="row" fxLayout.xs="column">
+  <!-- nav-bar -->
+  <div class="nav-container" fxFlex="200px" fxFlex.xs="10%" fxLayout="column" fxLayout.xs="row">
+    <div fxFlex.xs="50%" fxLayoutAlign.xs="center center" class="nav-item" (click)="computer_upload()" [ngStyle]="{ 'background-color' : (uploadType === uploadEnum.computer) ? '#cccccc' : '#f2f2f2' }">
+      <span class="material-icons">computer</span>
+      <span fxHide.xs="true" class="pl-4">{{'my_computer'|translate}}</span>
     </div>
-    <!-- main-div -->
-    <div fxFlex="calc(1em-200px)" fxFlex.xs="90%" fxLayout="column">
-      <!-- picker-div -->
-      <div fxFlex="85%" fxFlex.xs="75%" class="picker-container">
-        <!-- pick from my computer -->
-        <div class="w-full h-full p-5" *ngIf="uploadType === uploadEnum.computer">
-          <ngx-dropzone #drop class="custom-dropzone w-full h-full p-5" fxLayoutAlign="center center" (change)="onSelect($event)" [disableClick]="true" [multiple]="multiple" [accept]="fileAccept">
-            <ngx-dropzone-label fxLayout="column" *ngIf="dataSource.data.length < 1; else filesTable">
-              <p class="my-3" fxHide.xs="true"><span class="material-icons upload-icon">cloud_upload</span></p>
-              <p class="my-3" fxHide.xs="true"><span class="upload-hints">{{'drag_and_drop'|translate}}</span></p>
-              <p class="my-3" fxHide.xs="true"><span class="upload-hints">{{'or'|translate}}</span></p>
-              <p class="my-3"><button mat-raised-button color="primary" (click)="drop.showFileSelector()">{{'browse'|translate}}</button></p>
-            </ngx-dropzone-label>
-          </ngx-dropzone>
-        </div>
-        <!-- pick by link -->
-        <div class="w-full h-full p-5" *ngIf="uploadType === uploadEnum.link">
-            <div class="w-full pb-2" fxLayout="column" fxLayoutAlign="center center">
-            <h3 class="w-full">{{'upload_by_url_hint'|translate}}</h3>
-            <form class="w-full" fxLayout="row" (ngSubmit)="submitUrl($event)">
-                <input type="text" class="input-box border border-primary border-solid" [(ngModel)]="link" placeholder="{{'search' | translate}}" name="link">
-                <button type="submit" class="submit-btn bg-primary text-primary-contrast"><span class="material-icons">search</span></button>
-            </form>
-            </div>
-            <div *ngIf="dataSource.data.length < 1 ; else filesTable"></div>
-        </div>
-        <!-- image cropper -->
-        <div class="w-full h-full p-5" *ngIf="uploadType === uploadEnum.cropper" fxLayoutAlign="center center">
-          <image-cropper
-            *ngIf="selectedImage"
-            [imageFile]="selectedImage"
-            [maintainAspectRatio]="true"
-            [containWithinAspectRatio]="containWithinAspectRatio"
-            [aspectRatio]="aspectRatio"
-            [cropperMinWidth] = "100"
-            [transform]="transform"
-            [alignImage]="'left'"
-            [style.display]="loading ? 'none' : null"
-            [format]="selectedImageTypeShort"
-            (imageCropped)="imageCropped($event)"
-            (imageLoaded)="imageLoaded()"
-            (loadImageFailed)="loadImageFailed()"
-          ></image-cropper>
-          <mat-spinner *ngIf="loading"></mat-spinner>
-        </div>
-        <!-- loading -->
-        <ng-template #spinnerContainer>
-          <mat-spinner></mat-spinner>
-        </ng-template>
-      </div>
-      <!-- action-div -->
-      <div fxFlex="15%" fxFlex.xs="25%" class="px-4 py-2" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center" fxLayoutAlign.xs="space-evenly center">
-        <div>
-          <div fxLayoutGap="10px"  *ngIf="uploadType != uploadEnum.cropper">
-            <button mat-raised-button color="primary" (click)="drop.showFileSelector()" *ngIf="uploadType == uploadEnum.computer && dataSource.data.length > 0">
-              {{(multiple ? 'select_more' : 'reselect')|translate}}
-            </button>
-            <!-- <button mat-raised-button color="primary" class="left-button" (click)="loadGoogleDrive()"  *ngIf="uploadType == uploadEnum.google && dataSource.data.length > 0">
-              <mat-icon class="mr-3" [icIcon]="logoGoogleDrive" mat-list-icon></mat-icon>
-              {{(multiple ? 'select_more' : 'reselect')|translate}}
-            </button> -->
-            <button mat-button color="primary" *ngIf="selectedImage && uploadType != uploadEnum.cropper" (click)="cropImage()">{{'crop'|translate}}</button>
-          </div>
-          <div fxLayoutGap="10px" fxLayout="row" *ngIf="uploadType == uploadEnum.cropper">
-            <a (click)="zoomIn()"
-              [matTooltip]="'zoom_in' | translate"
-              class="w-9 h-9 leading-none flex items-center justify-center hover:bg-hover bg-green-light text-green"
-              mat-icon-button>
-              <span class="material-icons">zoom_in</span>
-            </a>
-            <a (click)="zoomOut()"
-              [matTooltip]="'zoom_out' | translate"
-              class="w-9 h-9 leading-none flex items-center justify-center hover:bg-hover bg-green-light text-green"
-              mat-icon-button>
-              <span class="material-icons">zoom_out</span>
-            </a>
-            <a (click)="rotateLeft()"
-              [matTooltip]="'rotate' | translate"
-              class="w-9 h-9 leading-none flex items-center justify-center hover:bg-hover bg-green-light text-green"
-              mat-icon-button>
-              <span class="material-icons">crop_rotate</span>
-            </a>
-            <a (click)="resetImage()"
-              [matTooltip]="'reset' | translate"
-              class="w-9 h-9 leading-none flex items-center justify-center hover:bg-hover bg-green-light text-green"
-              mat-icon-button>
-              <span class="material-icons">refresh</span>
-            </a>
-            <a (click)="switchPaddingMode()"
-              [matTooltip]="(containWithinAspectRatio? 'remove_padding': 'auto_padding') | translate"
-              class="w-9 h-9 leading-none flex items-center justify-center hover:bg-hover bg-green-light text-green"
-              mat-icon-button>
-              <span class="material-icons">{{containWithinAspectRatio ? 'fullscreen_exit' : 'fullscreen'}}</span>
-            </a>
-          </div>
-        </div>
-        <div>
-          <div fxLayoutGap="10px" *ngIf="uploadType != uploadEnum.cropper">
-            <button mat-button color="basic" (click)="clear_files()">{{'clear'|translate}}</button>
-            <button mat-raised-button color="primary" (click)="upload()" [disabled]="files.length < 1">{{'upload'|translate}}</button>
-          </div>
-          <div fxLayoutGap="10px" *ngIf="uploadType == uploadEnum.cropper">
-            <button mat-raised-button color="basic" *ngIf="multiple" (click)="cancelCrop()">{{'cancel'|translate}}</button>
-            <button mat-raised-button color="primary" (click)="applyCrop()">{{'apply'|translate}}</button>
-          </div>
-        </div>
-      </div>
+    <div fxFlex.xs="50%" fxLayoutAlign.xs="center center" class="nav-item" (click)="link_upload()" [ngStyle]="{ 'background-color' : (uploadType === uploadEnum.link) ? '#cccccc' : '#f2f2f2' }">
+      <span class="material-icons">public</span>
+      <span fxHide.xs="true" class="pl-4">{{'internet'|translate}}</span>
     </div>
+    <!-- <div fxFlex.xs="33%" fxLayoutAlign.xs="center center" class="nav-item" (click)="google_upload()" [ngStyle]="{ 'background-color' : (uploadType === uploadEnum.google) ? '#cccccc' : '#f2f2f2' }">
+      <span class="material-icons">add_to_drive</span>
+      <span fxHide.xs="true" class="pl-4">Google Drive</span>
+    </div> -->
   </div>
-  
-  <ng-template #filesTable>
-    <div class="file-table-container w-full" *ngIf="dataSource.data.length > 0" [ngStyle]="{ 'height' : (uploadType === uploadEnum.link) ? '70%' : '100%' }">
-      <table [dataSource]="dataSource" class="w-full" mat-table *ngIf="previewImage == false && previewVideo == false; else imagePreviewZone">
-        <ng-container matColumnDef="position">
-          <th *matHeaderCellDef mat-header-cell>No.</th>
-          <td *matCellDef="let i = index" mat-cell>{{ i + 1 }}</td>
-        </ng-container>
-        <ng-container matColumnDef="name">
-          <th *matHeaderCellDef mat-header-cell>{{'name'|translate}}</th>
-          <td *matCellDef="let row" mat-cell>{{ row.name }}</td>
-        </ng-container>
-        <ng-container matColumnDef="type">
-          <th *matHeaderCellDef mat-header-cell>{{'type'|translate}}</th>
-          <td *matCellDef="let row" mat-cell>{{ row.type }}</td>
-        </ng-container>
-        <ng-container matColumnDef="size">
-          <th *matHeaderCellDef mat-header-cell>{{'size'|translate}}</th>
-          <!-- <td *matCellDef="let row" mat-cell>{{ row.size | byte }}</td> -->
-        </ng-container>
-        <ng-container matColumnDef="action">
-          <th *matHeaderCellDef mat-header-cell></th>
-          <td *matCellDef="let i = index" mat-cell>
-            <a (click)="removeFile(i)"
-               class="actionIconButton hover:bg-hover text-red bg-pink-light"
-               mat-icon-button>
-              <span class="material-icons">close</span>
-            </a>
-          </td>
-        </ng-container>
-  
-        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-      </table>
-      <ng-template #imagePreviewZone>
-        <div class="w-full" fxLayout="row wrap" fxLayoutAlign="space-evenly" *ngIf="previewImage == true && isAllImages">
-          <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files" [file]="f" [removable]="true" (removed)="onRemove(f)" (click)="onSelectImage(f)" [matTooltip]="f.name" [ngClass]="{'selected': f == selectedImage}">
-          </ngx-dropzone-image-preview>
-        </div>
-        <div class="w-full" fxLayout="column" *ngIf="previewVideo == true && isAllVideos">
-          <ngx-dropzone-video-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files" [file]="f" [removable]="true" (removed)="onRemove(f)" [matTooltip]="f.name">
-          </ngx-dropzone-video-preview>
-        </div>
+  <!-- main-div -->
+  <div fxFlex="calc(1em-200px)" fxFlex.xs="90%" fxLayout="column">
+    <!-- picker-div -->
+    <div fxFlex="85%" fxFlex.xs="75%" class="picker-container">
+      <!-- pick from my computer -->
+      <div class="w-full h-full p-5" *ngIf="uploadType === uploadEnum.computer">
+        <ngx-dropzone #drop class="custom-dropzone w-full h-full p-5" fxLayoutAlign="center center" (change)="onSelect($event)" [disableClick]="true" [multiple]="multiple" [accept]="fileAccept">
+          <ngx-dropzone-label fxLayout="column" *ngIf="dataSource.data.length < 1; else filesTable">
+            <p class="my-3" fxHide.xs="true"><span class="material-icons upload-icon">cloud_upload</span></p>
+            <p class="my-3" fxHide.xs="true"><span class="upload-hints">{{'drag_and_drop'|translate}}</span></p>
+            <p class="my-3" fxHide.xs="true"><span class="upload-hints">{{'or'|translate}}</span></p>
+            <p class="my-3"><button mat-raised-button color="primary" (click)="drop.showFileSelector()">{{'browse'|translate}}</button></p>
+          </ngx-dropzone-label>
+        </ngx-dropzone>
+      </div>
+      <!-- pick by link -->
+      <div class="w-full h-full p-5" *ngIf="uploadType === uploadEnum.link">
+          <div class="w-full pb-2" fxLayout="column" fxLayoutAlign="center center">
+          <h3 class="w-full">{{'upload_by_url_hint'|translate}}</h3>
+          <form class="w-full" fxLayout="row" (ngSubmit)="submitUrl($event)">
+              <input type="text" class="input-box border border-primary border-solid" [(ngModel)]="link" placeholder="{{'search' | translate}}" name="link">
+              <button type="submit" class="submit-btn bg-primary text-primary-contrast"><span class="material-icons">search</span></button>
+          </form>
+          </div>
+          <div *ngIf="dataSource.data.length < 1 ; else filesTable"></div>
+      </div>
+      <!-- image cropper -->
+      <div class="w-full h-full p-5" *ngIf="uploadType === uploadEnum.cropper" fxLayoutAlign="center center">
+        <image-cropper
+          *ngIf="selectedImage"
+          [imageFile]="selectedImage"
+          [maintainAspectRatio]="true"
+          [containWithinAspectRatio]="containWithinAspectRatio"
+          [aspectRatio]="aspectRatio"
+          [cropperMinWidth] = "100"
+          [transform]="transform"
+          [alignImage]="'left'"
+          [style.display]="loading ? 'none' : null"
+          [format]="selectedImageTypeShort"
+          (imageCropped)="imageCropped($event)"
+          (imageLoaded)="imageLoaded()"
+          (loadImageFailed)="loadImageFailed()"
+        ></image-cropper>
+        <mat-spinner *ngIf="loading"></mat-spinner>
+      </div>
+      <!-- loading -->
+      <ng-template #spinnerContainer>
+        <mat-spinner></mat-spinner>
       </ng-template>
     </div>
-  </ng-template>
-  
+    <!-- action-div -->
+    <div fxFlex="15%" fxFlex.xs="25%" class="px-4 py-2" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center" fxLayoutAlign.xs="space-evenly center">
+      <div>
+        <div fxLayoutGap="10px"  *ngIf="uploadType != uploadEnum.cropper">
+          <button mat-raised-button color="primary" (click)="drop.showFileSelector()" *ngIf="uploadType == uploadEnum.computer && dataSource.data.length > 0">
+            {{(multiple ? 'select_more' : 'reselect')|translate}}
+          </button>
+          <!-- <button mat-raised-button color="primary" class="left-button" (click)="loadGoogleDrive()"  *ngIf="uploadType == uploadEnum.google && dataSource.data.length > 0">
+            <mat-icon class="mr-3" [icIcon]="logoGoogleDrive" mat-list-icon></mat-icon>
+            {{(multiple ? 'select_more' : 'reselect')|translate}}
+          </button> -->
+          <button mat-button color="primary" *ngIf="selectedImage && uploadType != uploadEnum.cropper" (click)="cropImage()">{{'crop'|translate}}</button>
+        </div>
+        <div fxLayoutGap="10px" fxLayout="row" *ngIf="uploadType == uploadEnum.cropper">
+          <a (click)="zoomIn()"
+            [matTooltip]="'zoom_in' | translate"
+            class="w-9 h-9 leading-none flex items-center justify-center hover:bg-hover bg-green-light text-green"
+            mat-icon-button>
+            <span class="material-icons">zoom_in</span>
+          </a>
+          <a (click)="zoomOut()"
+            [matTooltip]="'zoom_out' | translate"
+            class="w-9 h-9 leading-none flex items-center justify-center hover:bg-hover bg-green-light text-green"
+            mat-icon-button>
+            <span class="material-icons">zoom_out</span>
+          </a>
+          <a (click)="rotateLeft()"
+            [matTooltip]="'rotate' | translate"
+            class="w-9 h-9 leading-none flex items-center justify-center hover:bg-hover bg-green-light text-green"
+            mat-icon-button>
+            <span class="material-icons">crop_rotate</span>
+          </a>
+          <a (click)="resetImage()"
+            [matTooltip]="'reset' | translate"
+            class="w-9 h-9 leading-none flex items-center justify-center hover:bg-hover bg-green-light text-green"
+            mat-icon-button>
+            <span class="material-icons">refresh</span>
+          </a>
+          <a (click)="switchPaddingMode()"
+            [matTooltip]="(containWithinAspectRatio? 'remove_padding': 'auto_padding') | translate"
+            class="w-9 h-9 leading-none flex items-center justify-center hover:bg-hover bg-green-light text-green"
+            mat-icon-button>
+            <span class="material-icons">{{containWithinAspectRatio ? 'fullscreen_exit' : 'fullscreen'}}</span>
+          </a>
+        </div>
+      </div>
+      <div>
+        <div fxLayoutGap="10px" *ngIf="uploadType != uploadEnum.cropper">
+          <button mat-button color="basic" (click)="clear_files()">{{'clear'|translate}}</button>
+          <button mat-raised-button color="primary" (click)="upload()" [disabled]="files.length < 1">{{'upload'|translate}}</button>
+        </div>
+        <div fxLayoutGap="10px" *ngIf="uploadType == uploadEnum.cropper">
+          <button mat-raised-button color="basic" *ngIf="multiple" (click)="cancelCrop()">{{'cancel'|translate}}</button>
+          <button mat-raised-button color="primary" (click)="applyCrop()">{{'apply'|translate}}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #filesTable>
+  <div class="file-table-container w-full" *ngIf="dataSource.data.length > 0" [ngStyle]="{ 'height' : (uploadType === uploadEnum.link) ? '70%' : '100%' }">
+    <table [dataSource]="dataSource" class="w-full" mat-table *ngIf="previewImage == false && previewVideo == false; else imagePreviewZone">
+      <ng-container matColumnDef="position">
+        <th *matHeaderCellDef mat-header-cell>No.</th>
+        <td *matCellDef="let i = index" mat-cell>{{ i + 1 }}</td>
+      </ng-container>
+      <ng-container matColumnDef="name">
+        <th *matHeaderCellDef mat-header-cell>{{'name'|translate}}</th>
+        <td *matCellDef="let row" mat-cell>{{ row.name }}</td>
+      </ng-container>
+      <ng-container matColumnDef="type">
+        <th *matHeaderCellDef mat-header-cell>{{'type'|translate}}</th>
+        <td *matCellDef="let row" mat-cell>{{ row.type }}</td>
+      </ng-container>
+      <ng-container matColumnDef="size">
+        <th *matHeaderCellDef mat-header-cell>{{'size'|translate}}</th>
+        <td *matCellDef="let row" mat-cell>{{ row.size | byte }}</td>
+      </ng-container>
+      <ng-container matColumnDef="action">
+        <th *matHeaderCellDef mat-header-cell></th>
+        <td *matCellDef="let i = index" mat-cell>
+          <a (click)="removeFile(i)"
+              class="actionIconButton hover:bg-hover text-red bg-pink-light"
+              mat-icon-button>
+            <span class="material-icons">close</span>
+          </a>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <ng-template #imagePreviewZone>
+      <div class="w-full" fxLayout="row wrap" fxLayoutAlign="space-evenly" *ngIf="previewImage == true && isAllImages">
+        <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files" [file]="f" [removable]="true" (removed)="onRemove(f)" (click)="onSelectImage(f)" [matTooltip]="f.name" [ngClass]="{'selected': f == selectedImage}">
+        </ngx-dropzone-image-preview>
+      </div>
+      <div class="w-full" fxLayout="column" *ngIf="previewVideo == true && isAllVideos">
+        <ngx-dropzone-video-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files" [file]="f" [removable]="true" (removed)="onRemove(f)" [matTooltip]="f.name">
+        </ngx-dropzone-video-preview>
+      </div>
+    </ng-template>
+  </div>
+</ng-template>
