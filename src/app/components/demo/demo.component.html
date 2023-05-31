@@ -23,18 +23,16 @@
             </mat-form-field>
         </div>
         <div fxLayout="row" fxLayoutAlign="start center">
-            <h3 fxFlex="300px">Preview Image</h3>
-            <mat-button-toggle-group [(ngModel)]="previewImage" name="preview_image" aria-label="Select Multiple File">
-                <mat-button-toggle [value]="true">Yes</mat-button-toggle>
-                <mat-button-toggle [value]="false">No</mat-button-toggle>
-            </mat-button-toggle-group>
-        </div>
-        <div fxLayout="row" fxLayoutAlign="start center">
-            <h3 fxFlex="300px">Preview Video</h3>
-            <mat-button-toggle-group [(ngModel)]="previewVideo" name="preview_video" aria-label="Select Multiple File">
-                <mat-button-toggle [value]="true">Yes</mat-button-toggle>
-                <mat-button-toggle [value]="false">No</mat-button-toggle>
-            </mat-button-toggle-group>
+            <h3 fxFlex="300px">Preview Format</h3>
+            <mat-form-field>
+                <mat-label>Preview Format</mat-label>
+                <mat-select [(ngModel)]="displayFormat" (selectionChange)="displayFormatChange()">
+                    <mat-option value="table">Table</mat-option>
+                    <mat-option value="image">Image</mat-option>
+                    <mat-option value="video">Video</mat-option>
+                    <mat-option value="auto">Auto</mat-option>
+                </mat-select>
+            </mat-form-field>
         </div>
         <div fxLayout="row" fxLayoutAlign="start center">
             <h3 fxFlex="300px">Image Cropper Aspect Radio</h3>

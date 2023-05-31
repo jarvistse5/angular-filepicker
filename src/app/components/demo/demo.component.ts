@@ -15,6 +15,7 @@ export class DemoComponent {
   multiple: boolean = true;
   previewImage: boolean = true;
   previewVideo: boolean = true;
+  displayFormat: string = 'auto';
   aspectRatio: number = 4/3;
   aspectRatioString: string = "4:3";
 
@@ -31,6 +32,22 @@ export class DemoComponent {
       this.aspectRatio = 4/3;
     } else if (this.aspectRatioString = '16:9') {
       this.aspectRatio = 16/9;
+    }
+  }
+
+  displayFormatChange() {
+    if (this.displayFormat === 'auto') {
+      this.previewImage = true;
+      this.previewVideo = true;
+    } else if (this.displayFormat === 'image') {
+      this.previewImage = true;
+      this.previewVideo = false;
+    } else if (this.displayFormat === 'video') {
+      this.previewImage = false;
+      this.previewVideo = true;
+    } else {
+      this.previewImage = false;
+      this.previewVideo = false;
     }
   }
 
