@@ -2,6 +2,30 @@
     padding: 0px !important;
     width: 1000px;
 }
+
+h2 {
+    margin: 0;
+}
+
+.bg-primary {
+    background-color: #3f51b5;
+}
+
+.text-primary-contrast {
+    color: #FFFFFF;
+}
+
+.bg-green-light {
+    background-color: rgba(76, 175, 80, 0.1);
+}   
+
+.text-red {
+    color: rgb(244, 67, 54);
+}
+
+.bg-pink-light {
+    background-color: rgba(233, 30, 99, 0.1);
+}
 // .file-picker {
 //     width: 1000px;
 //     padding: 0px !important;
